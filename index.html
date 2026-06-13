@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harun Digital Space</title>
+    <!-- Favicon dengan SVG dinamis berbentuk box digital minimalis -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23238636%22/><path d=%22M30 30h40v40H30z%22 fill=%22none%22 stroke=%22white%22 stroke-width=%228%22/><path d=%22M45 45h10v10H45z%22 fill=%22%2358a6ff%22/></svg>">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --surface-color: rgba(22, 27, 34, 0.85);
+            --accent-color: #58a6ff;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Layer Animasi Background yang Bergerak Bebas */
+        .bg-animate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, rgba(88, 166, 255, 0.04), rgba(35, 134, 54, 0.04));
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: floatAround 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -10%;
+            left: -10%;
+            animation-duration: 25s;
+        }
+
+        .shape:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            bottom: -10%;
+            right: -10%;
+            animation-duration: 35s;
+            animation-direction: reverse;
+        }
+
+        .shape:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 70%;
+            animation-duration: 18s;
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+            33% {
+                transform: translate(30px, 50px) rotate(120deg) scale(1.1);
+                border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%;
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg) scale(0.9);
+                border-radius: 60% 40% 60% 40% / 40% 50% 50% 60%;
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg) scale(1);
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Ikon Profil Default ala WhatsApp / FB */
+        .profile-img-container {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background-color: #30363d;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .profile-img-container svg {
+            width: 100%;
+            height: 100%;
+            fill: #8b949e;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            background-color: #161b22;
+        }
+
+        .section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+            box-shadow: 0 6px 16px rgba(88, 166, 255, 0.1);
+        }
+
+        .card h3 {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #238636;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 35px;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #2ea043;
+            transform: scale(1.01);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .pixel-badge {
+            background: #f78166;
+            color: #000;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .code-badge {
+            background: #388bfd;
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Layer Komponen Animasi Latar Belakang -->
+    <div class="bg-animate">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <!-- SVG Avatar Profil Default -->
+            <div class="profile-img-container">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5-4-8-4z"/>
+                </svg>
+            </div>
+            <h1>Harun Marketplace</h1>
+            <p class="tagline">Solusi Digital dan Program untuk lini: Pengembangan Game, Otomasi Sistem, dan Desain Kreatif.</p>
+        </header>
+
+        <div class="section-title">Layanan & Produk Utama</div>
+
+        <div class="card">
+            <h3><span>🤖</span> Sistem Otomasi & Bot <span class="code-badge">Python</span></h3>
+            <p>Pembuatan script otomatisasi database, bot Telegram/WhatsApp interaktif, scrap data, hingga efisiensi workflow bisnis online Anda agar berjalan otomatis 24/7.</p>
+        </div>
+
+        <div class="card">
+            <h3><span>👾</span> Aset Game & Pixel Art <span class="pixel-badge">Kreatif</span></h3>
+            <p>Desain karakter, environment, dan asset digital beresolusi pixel art kustom kualitas premium untuk proyek game development atau kebutuhan branding visual unik Anda.</p>
+        </div>
+
+        <div class="card">
+            <h3><span>💻</span> Web & UI Design Terintegrasi</h3>
+            <p>Pengembangan landing page interaktif, ringkas, berperforma tinggi, serta desain interface yang ramah pengguna untuk meningkatkan konversi penjualan produk Anda.</p>
+        </div>
+
+        <!-- Tombol WhatsApp dengan Nomor Baru Anda -->
+        <a href="https://wa.me/628567773703" class="btn" target="_blank">
+            💬 Konsultasikan Proyek Anda di WhatsApp
+        </a>
+
+        <footer>
+            <p>&copy; 2026 Harun Marketplace. Hosted via Vercel.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
